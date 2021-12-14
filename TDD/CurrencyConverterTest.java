@@ -3,10 +3,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 class CurrencyConverterTest {
     CurrencyConverter converter = new CurrencyConverter();
-
     @Nested
-    public class  RupeesToDollar {
-
+    public class RupeesToDollar {
         @Test
         public void checkIfSeventyFourPointEightFiveRupeesIsEqualToOneDollar() {
             double actualMoney = converter.rupeesToDollar(74.85);
@@ -16,7 +14,6 @@ class CurrencyConverterTest {
         }
 
     }
-
     @Nested
     public class AddMoneyToWallet {
         @Test
@@ -25,7 +22,6 @@ class CurrencyConverterTest {
             converter.addDollarsToWallet(1);
             assertEquals(124.85, converter.getWalletBalance("Rs"));
         }
-
         @Test
         public void checkIfAdditionOfSeventyFourPointEightFiveRupeesAndOneDollarAndOneHundredAndFortyNinePointSevenRupeesGivesFourDollars() {
             converter.addRupeesToWallet(74.85);
@@ -33,9 +29,8 @@ class CurrencyConverterTest {
             converter.addRupeesToWallet(149.7);
             assertEquals(4, converter.getWalletBalance("$"));
         }
+
     }
-
-
     //@Nested
     //public class preferredCurrency{
        // @Test
@@ -55,12 +50,31 @@ class CurrencyConverterTest {
             assertEquals(50, converter.getWalletBalance("Rs"));
         }
         @Test
+        public void checkIfWithdrawalOfOneHundredAndFortyNinePointSevenRsFromFourDollarsGivesTwoDollars() {
+            converter.addRupeesToWallet(74.85);
+            converter.addDollarsToWallet(1);
+            converter.addRupeesToWallet(149.7);
+            converter.withdrawRupeesFromWallet(149.7);
+            assertEquals(2, converter.getWalletBalance("$"));
+        }
+        @Test
         public void checkIfWithdrawalOfOneHundredAndFortyNinePointSevenRupeesFromFourDollarsGivesTwoDollars() {
             converter.addRupeesToWallet(74.85);
             converter.addDollarsToWallet(1);
             converter.addRupeesToWallet(149.7);
             converter.withdrawRupeesFromWallet(149.7);
             assertEquals(2, converter.getWalletBalance("$"));
+        }
+        @Test
+        public void checkIfWithdrawalOfOneDollarAndTwentyFiveRsGivesTwentyFiveRs() {
+            converter.addDollarsToWallet(1);
+            converter.addRupeesToWallet(25);
+            converter.withdrawDollarsFromWallet(1);
+            assertEquals(25, converter.getWalletBalance("Rs"));
+        }
+        @Test
+        public void throwsIllegalArgumentExceptionWhenWalletBalanceIsZero(){
+            assertThrows(IllegalArgumentException.class,()-> converter.minimumBalance(-1));
         }
 
 
@@ -75,7 +89,6 @@ class CurrencyConverterTest {
 //As a wallet owner I would like to be able to put money into my wallet so that I can take it out later.
 //As a wallet owner, I want to know the total money my wallet has for the preferred currency. When Rs.50 & $1 added to my wallet,
 // Then the sum of money in the wallet is Rs.124.85, (Given preferred currency is Rs.)
-
 //As a wallet owner, I want to know the total money my wallet has for the preferred currency.
 // When Rs.74.85, $1, Rs.149.7 added to my wallet, Then sum of money in the wallet is $4, (Given preferred currency is $)
 // As a wallet owner I would like to be able to take a specified amount of money out of the wallet.

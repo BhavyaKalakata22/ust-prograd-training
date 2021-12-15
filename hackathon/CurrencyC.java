@@ -84,9 +84,7 @@ public class ConverterC {
                     System.out.printf("%.2f", currency.canadianDollarToRupees(amountInCAD));
             }
 
-
             logger.info("Program Stopped");
         }
     }
-
 }

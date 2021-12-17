@@ -1,4 +1,4 @@
-public class FlippedCoin {
+public class Statistics {
     double head;
     double tail;
     public double whenProbabilityIsNegative(double probability) {

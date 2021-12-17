@@ -1,8 +1,8 @@
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-public class FlippedCoinTest {
-    FlippedCoin coinToss= new FlippedCoin();
+public class StatisticsTest {
+    Statistics coinToss= new Statistics();
     @Nested // heads=tail
     public class HeadsIsEqualToTails{
         @Test

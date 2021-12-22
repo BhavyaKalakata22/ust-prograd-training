@@ -14,14 +14,10 @@ public class SimpleCalculatorApplication {
 	public static void main(String[] args) {
 		ApplicationContext context =  SpringApplication.run(SimpleCalculatorApplication.class, args);
 		Calculator cal = context.getBean(Calculator.class);
-		double add = cal.add();
-		System.out.println("Addition of two Numbers : " +add);
-		double sub = cal.sub();
-		System.out.println("subtraction of two Numbers : " +sub);
-		double mul = cal.mul();
-		System.out.println("Multiplication of two Numbers : " +mul);
-		double div = cal.div();
-		System.out.println("Division of two Numbers : " +div);
+        System.out.println("Addition: " +cal.add());
+		System.out.println("subtraction: " +cal.sub());
+        System.out.println("Multiplication: " +cal.mul());
+		System.out.println("Division: " +cal.div());
 	}
 
 

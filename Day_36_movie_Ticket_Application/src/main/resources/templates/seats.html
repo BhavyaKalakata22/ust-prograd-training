@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Ticket Booking</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/seats.css">
+
+</head>
+<body  style="background-color:orange">
+<!--<h1>Movies List</h1>-->
+<!--<span th:text="${message}"/>-->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#" th:text="${userName}"></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/{userName}/myBookings (userName=${userName})}">My Bookings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+
+    <div class="row mt-4 p-2">
+        <div class="screen-side">
+            <div class="screen">Screen</div>
+            <p class="select-text">Please select a seat!!</p>
+        </div>
+    </div>
+    <div class="row mt-4"><span th:text="${message}"/></div>
+    <div class="row mt-4"></div>
+
+    <div class="row mt-4 p-2">
+        <table class="table">
+
+            <tbody>
+            <tr class="row">
+                <td class="col">A</td>
+                <td class="col-10">
+                    <div class="row">
+                        <div class="col">
+                            <input type="checkbox" id="1A" name="seat"/>
+                            <label for="1A">1A</label>
+                        </div>
+                        <div class="col">
+                            <input type="checkbox" id="2A" name="seat"/>
+                            <label for="2A">2A</label>
+                        </div>
+                        <div class="col">
+                            <input type="checkbox" id="3A" name="seat"/>
+                            <label for="3A">3A</label>
+                        </div>
+                        <div class="col">
+                            <input type="checkbox" id="4A" name="seat"/>
+                            <label for="4A">4A</label>
+                        </div>
+                        <div class="col">
+                            <input type="checkbox" id="5A" name="seat"/>
+                            <label for="5A">5A</label>
+                        </div>
+                        <div class="col">
+                            <input type="checkbox" id="6A" name="seat"/>
+                            <label for="6A">6A</label>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="col">B</td>
+                <td class="col-10">
+                    <div class="row">
+                        <div class="col">
+                            <input type="checkbox" id="1B" name="seat"/>
+                            <label for="1B">1B</label>
+                        </div>
+                        <div class="col">
+                            <input type="checkbox" id="2B" name="seat"/>
+                            <label for="2B">2B</label>
+                        </div>
+                        <div class="col">
+                            <input type="checkbox" id="3B" name="seat"/>
+                            <label for="3B">3B</label>
+                        </div>
+                        <div class="col">
+                            <input type="checkbox" id="4B" name="seat"/>
+                            <label for="4B">4B</label>
+                        </div>
+                        <div class="col">
+                            <input type="checkbox" id="5B" name="seat"/>
+                            <label for="5B">5B</label>
+                        </div>
+                        <div class="col">
+                            <input type="checkbox" id="6B" name="seat"/>
+                            <label for="6B">6B</label>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="col">C</td>
+                <td class="col-10">
+                    <div class="row">
+                        <div class="col">
+                            <input type="checkbox" id="1C" name="seat"/>
+                            <label for="1C">1C</label>
+                        </div>
+                        <div class="col">
+                            <input type="checkbox" id="2C" name="seat"/>
+                            <label for="2C">2C</label>
+                        </div>
+                        <div class="col">
+                            <input type="checkbox" id="3C" name="seat"/>
+                            <label for="3C">3C</label>
+                        </div>
+                        <div class="col">
+                            <input type="checkbox" id="4C" name="seat"/>
+                            <label for="4C">4C</label>
+                        </div>
+                        <div class="col">
+                            <input type="checkbox" id="5C" name="seat"/>
+                            <label for="5C">5C</label>
+                        </div>
+                        <div class="col">
+                            <input type="checkbox" id="6C" name="seat"/>
+                            <label for="6C">6C</label>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+        <button id="bookSeat">Pay <span id="amount"></span></button>
+    </div>
+    <form th:action="@{/{userName}/booked/{id} (userName=${userName},id=${shows})}" method="post" style="display:none">
+        <input type="text" id="bookedSeats" name="bookedSeats"/>
+        <button type="submit" id="formSubmitButton">Book</button>
+    </form>
+</div>
+
+<script>
+function bookSeats() {
+    let inputs = document.querySelectorAll("input[type=checkbox]")
+
+    for(let i =0; i< inputs.length; i++){
+        if(inputs[i].checked){
+            document.getElementById("bookedSeats").value += inputs[i].id + ","
+        }
+    }
+    document.getElementById("formSubmitButton").click()
+}
+function price() {
+    let inputs = document.querySelectorAll("input[type=checkbox]")
+    let price = 200
+    let count = 0
+    for(let i =0; i< inputs.length; i++){
+        if(inputs[i].checked){
+            count++
+        }
+    }
+   document.getElementById("amount").innerHTML = price*count
+}
+
+document.querySelectorAll("input[type=checkbox]").forEach(function(input)
+{ input.addEventListener("click", price) }
+)
+
+document.getElementById("bookSeat").addEventListener("click",bookSeats)
+</script>
+</body>
+
+</html>

@@ -11,13 +11,7 @@ class Solution{
             s[i]=sc.next();
         }
       	sc.close();
-
-
-       // We want to sort in descending order while preserving the contents 
-        // of each String. A comparator can achieve this for us. We convert  
-        // to BigDecimal inside our comparator so that the change is not 
-        // permanent and our String's form for each number is preserved.
-        Comparator<String> customComparator = new Comparator<String>() {
+          Comparator<String> customComparator = new Comparator<String>() {
             @Override
             public int compare(String s1, String s2) {
                 BigDecimal a = new BigDecimal(s1);
